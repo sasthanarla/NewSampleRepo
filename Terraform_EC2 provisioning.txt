@@ -1,0 +1,20 @@
+provider "aws" {
+  access_key = "AKIAX5PM7DXBOJGJFQHW"
+  secret_key = "tRAL3pFD9KJLSWSzqA/5Pe8s0PvzynX86SmDBRas"
+  region     = "us-east-1"
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-0947d2ba12ee1ff75"
+  instance_type = "t2.micro"
+  key_name = "terraform-key"
+  security_groups = ["${aws_security_group.allow_rdp.name}"]
+
+}
+
+resource "aws_security_group" "allow_rdp" {
+  name        = "allow_rdp"
+  description = "Allow ssh traffic"
+}
+
+ 
